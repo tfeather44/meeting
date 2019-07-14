@@ -1,0 +1,17 @@
+<div class="flex flex-wrap items-center mb-5 text-indigo-darker">
+  <div class="flex-1 flex justify-between items-center">
+    <div><h3 class="text-lg"><%= user.name %></h3> <%= user.username %> <% if current_user %><% end %></div>
+    <p><%= readable_time(user.created_at) %> 注册 </p>
+
+  </div>
+  <%= link_to '删除用户', users_path, method: :delete, data: { confirm: '确认删除吗？' }, class: "btn btn-destroy ml-4" if admin? %>
+</div>
+
+<% if user.meetings.any? %>
+  <div class="block pl-2 border-l border-indigo-light mb-5">
+    <p class="text-xs uppercase tracking-loose text-grey-darker pt-1">以下会议即将开始</p>
+    <% user.meetings.each do |meeting| %>
+        <%= link_to meeting.name, meeting, class: "link my-2 inline-block" %>
+    <% end %>
+  </div>
+<% end %>
